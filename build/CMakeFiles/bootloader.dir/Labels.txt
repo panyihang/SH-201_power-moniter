@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/anye/Desktop/lv_port_esp32/build/CMakeFiles/bootloader
+/home/anye/Desktop/lv_port_esp32/build/CMakeFiles/bootloader.rule
+/home/anye/Desktop/lv_port_esp32/build/CMakeFiles/bootloader-complete.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/anye/Desktop/lv_port_esp32/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

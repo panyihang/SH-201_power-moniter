@@ -1,0 +1,1 @@
+cmd='/usr/bin/cmake;-DSDKCONFIG=/home/anye/Desktop/lv_port_esp32/sdkconfig;-DIDF_PATH=/home/anye/esp/esp-idf-4.3;-DIDF_TARGET=esp32s2;-DPYTHON_DEPS_CHECKED=1;-DPYTHON=/home/anye/.espressif/python_env/idf4.3_py3.10_env/bin/python;-DEXTRA_COMPONENT_DIRS=/home/anye/esp/esp-idf-4.3/components/bootloader;-DLEGACY_INCLUDE_COMMON_HEADERS=;-GNinja;<SOURCE_DIR><SOURCE_SUBDIR>'

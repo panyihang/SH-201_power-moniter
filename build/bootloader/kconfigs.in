@@ -1,0 +1,7 @@
+source "/home/anye/esp/esp-idf-4.3/components/efuse/Kconfig"
+source "/home/anye/esp/esp-idf-4.3/components/esp32s2/Kconfig"
+source "/home/anye/esp/esp-idf-4.3/components/esp_common/Kconfig"
+source "/home/anye/esp/esp-idf-4.3/components/esp_system/Kconfig"
+source "/home/anye/esp/esp-idf-4.3/components/log/Kconfig"
+source "/home/anye/esp/esp-idf-4.3/components/newlib/Kconfig"
+source "/home/anye/esp/esp-idf-4.3/components/spi_flash/Kconfig"
