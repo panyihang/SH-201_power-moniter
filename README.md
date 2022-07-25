@@ -1,136 +1,82 @@
-# LVGL project for ESP32
+# SH-201_智能太阳能功率表
 
-This is an ESP32 demo project showcasing LVGL v7 with support for several display controllers and touch controllers.
-The demo application is the `lv_demo_widgets` project from the [lv_examples](https://github.com/lvgl/lv_examples) repository.
+###
 
-- Version of ESP-IDF required 4.2. NOTE: We're trying to make this repo backwards compatible, usage of idf.py is encouraged.
-- Version of LVGL used: 7.9.
-- Version of lv_examples used: 7.9.
+### 3.2寸大屏的电压电流表
 
-#### Table of content
-- [Get started](#get-started)
-- [Use LVGL in your ESP-IDF project](#use-lvgl-in-your-esp-idf-project)
-- [Use lvgl_esp32_drivers in your project](#use-lvgl_esp32_drivers-in-your-project)
-- [Platformio support](#platformio-support)
-- [ESP32-S2 Support](#esp32-s2-support)
+<span class="colour" style="color: rgb(230, 126, 35);">Q群 565264047 欢迎来玩～</span>
 
-Example demo for TFT displays:
+# <span class="colour" style="color: rgb(45, 194, 107);">如需合作请联系邮箱 <u>[root@an-ye.top](mailto:root@an-ye.top)</u></span>
 
-![Example GUI_DEMO with ESP32 using LVGL](images/new_photo.jpg)
+![](https://image.lceda.cn/pullimage/arQxZXJ8Mlkj4D3LzyLkc0r4rlcc5lX3y8VFWFZ8.jpeg)
 
-Monochrome support:
+![](https://image.lceda.cn/pullimage/jqNtsTtEuF7kAE2ffq0PEWK6AMvOLgZxMCirbMPY.jpeg)
 
-![Example_monochrome demo with ESP32 using LVGL](images/new_mono.jpg)
+![](https://image.lceda.cn/pullimage/xx6mCaEcfP3GcnY5op4DNtoQttrHJuXhFU4zxhPt.jpeg)
+烧录需使用「[Cube-101_esp-tool烧录调试工具](/an_ye/cube-tong-yongesp-shao-lu-mu-kuai)」，正向插入TYPE-C口，如上图
 
-## Display and touch controllers
+代码开源仓库：[https://github.com/panyihang/SH-201_power-moniter](https://github.com/panyihang/SH-201_power-moniter)
+正在更新，代码还不完善，但。。。又不是不能用（欢迎各位巨佬提pr
 
-The display and touch (indev) controllers are now into it's own repository, you can find it [here](https://github.com/lvgl/lvgl_esp32_drivers).
-To report any issue or add new display or touch (indev) drivers you can do so in the `lvgl_esp32_drivers` repo.
+#
 
-## Get started
+# 0x00:前言
 
-### Prerequisites
+B站「低成本家庭发电站」系列正式开始填坑，原谅已经咕咕咕了快一年
 
-- ESP-IDF Framework.
+# 0x01:更新说明
 
-### Note
+<span class="colour" style="color: rgb(185, 106, 217);">「2022.06.23 Ver0.2」修改LED供电，原方案电流不足，调整走线，修改RP2040封装</span>
+<span class="colour" style="color: rgb(53, 152, 219);">「2022.07.08 Ver0.3」更换MCU，使用ESP32S2</span>
 
-This project tries to be compatible with both the ESP-IDF v3.x and v4.0, but using v4.0 is recommended.
-Instructions assume you are using the v4.x toolchain, otherwise use the make commands, e.g. instead of running `idf.py menuconfig`, run `make menuconfig`.
+# 0x02:硬件部分
 
-### Build and run the demo.
+* 主控MCU：ESP32S2
+* INA199电流传感器
+* AHT21温湿度传感器
+* TFT8K2798屏幕，显示效果可以
+* 背部磁吸，方便固定墙上（需要墙面支持）ps:磁吸墙面教程在后面后面
 
-1. Clone this project by `git clone --recurse-submodules https://github.com/lvgl/lv_port_esp32.git`, this will pull this repo and its submodules.
+# 0x03:软件部分
 
-2. Get into the created `lv_port_esp32` directory.
+* 系统：Arch linux
+* 开发环境：Esp-idf 4.3
+* 显示框架：LVGL7.2 <span class="colour" style="color: rgb(224, 62, 45);">（魔改过底层函数，不通用）</span>
+* <span class="colour" style="color: rgb(0, 0, 0);"><span class="colour" style="color: rgb(0, 0, 0);">基于乐鑫官方移植项目lv\_port\_esp32</span></span>
 
-3. Run `idf.py menuconfig`
+# 0x04:编译/开发/烧录说明
 
-4. Configure LVGL in `Components config->LVGL Configuration`. For monochrome displays use the mono theme and we suggest enabling the `unscii 8` font.
+编译&烧录命令：
+开发环境esp-idf 4.3，Arch linux
 
-5. Configure your display and/or touch controllers in `Components config->LVGL TFT Display Configuration` and `Components config->LVGL TOUCH Configuration`.
+`cd xxx(工程目录下）`
+`. ~/esp/esp-idf-4.3/export.sh `
+`idf.py build`
+(这时插上板子）
+`idf.py flash`
 
-6. Store your project configuration.
+附带使用esptool.py烧录二进制文件的说明
+烧录命令：
+`(PORT)`   取决于操作系统和烧录方式，例如:
 
-7. Build the project with `idf.py build`
+|  |  |  |
+| --- | --- | --- |
+| / | 手动USB烧录 | [Cube-esp-tool](/an_ye/cube-tong-yongesp-shao-lu-mu-kuai)快速烧录 |
+| Linux | /dev/ttyACM[X] | /dev/ttyUSB[X] |
+| Windows | COM[X] | COM[X] |
 
-8. If the build don't throw any errors, flash the demo with `idf.py -p (YOUR SERIAL PORT) flash` (with `make` this is just `make flash` - in 3.x PORT is configured in `menuconfig`)
+#
 
-## Use LVGL in your ESP-IDF project
+# 0x05:如何造一个支持磁吸的墙面（超低成本版）
 
-LVGL now includes a Kconfig file which is used to configure most of the LVGL configuration options via menuconfig, so it's not necessary to use a custom `lv_conf.h` file.
+Fe3O4粉磁吸区域是黑灰色的，无法改色
+Fe粉看起来只是偏黄一点，基本能看出原色，但南方潮湿不建议使用
 
-It is recommended to add LVGL as a submodule in your IDF project's git repo.
-
-From your project's root directory:
-1. Create a directory named `components` (if you don't have one already) with `mkdir -p components`.
-2. Clone the lvgl repository inside the `components` directory with `git submodule add https://github.com/lvgl/lvgl.git components/lvgl`
-3. Run `idf.py menuconfig`, go to `Component config` then `LVGL configuration` to configure LVGL.
-
-## Use lvgl_esp32_drivers in your project
-
-It is recommended to add [lvgl_esp32_drivers](https://github.com/lvgl/lvgl_esp32_drivers) as a submodule in your IDF project's git repo.
-
-From your project's root directory:
-1. Create a directory named `components` (if you don't have one already) with `mkdir -p components`.
-2. Clone the lvgl_esp32_drivers repository inside the `components` directory with `git submodule add https://github.com/lvgl/lvgl_esp32_drivers.git components/lvgl_esp32_drivers`
-3. Run `idf.py menuconfig`, go to `Component config` then `LVGL TFT configuration` and `LVGL TFT Display configuration` to configure lvgl_esp32_drivers.
-
-## Platformio support
-
-Using the [lv_platformio](https://github.com/lvgl/lv_platformio) project add the following lines to `platformio.ini` file:
-
-```
-[env:esp32]
-platform = espressif32
-framework = espidf
-board = esp-wrover-kit
-```
-
-Change the default environment to `default_envs = esp32`.
-
-Modify the `main.c` like this:
-
-```c
-#include "lvgl.h"
-
-// #include "driver.h"
-
-#include "demo.h"
-
-int app_main(void)
-{
-    lv_init();
-
-    /* Initialize your hardware. */
-    
-    /* hw_init(); */
-
-    demo_create();
-
-    /* Create the UI or start a task for it.
-     * In the end, don't forget to call `lv_task_handler` in a loop. */
-
-    /* hw_loop(); */
-
-    return 0;
-}
-```
-
-For more information see: [platformio with espidf framework compability](https://github.com/lvgl/lv_port_esp32/issues/168).
-
-# ESP32-S2 Support
-
-Support for ESP32-S2 variant is Work In Progress.
-Smaller displays (e.g. 320x240) work fine, but larger ones need testing.
-
-## Background
-
-ESP32-S2 has less on-chip SRAM than its predecessor ESP32 (520kB vs. 320kB).
-This causes problems with memory allocation with large LVGL display buffers as they don't fit into the on-chip memory
-and external PSRAM is not accessible by DMA.
-
-Moreover, static allocation to external PSRAM is not yet supported
-(see [GitHub issue](https://github.com/espressif/esp-idf/issues/6162)).
-
-At this momement, the buffers are dynamicaly allocated with DMA capabilty and memory allocator handles the rest.
+首先，准备任意颜色的内墙乳胶漆100g（1000g  8元左右，别买多了，用不完的。。。）
+![](https://image.lceda.cn/pullimage/EJYhgZJ6EyzWkFq1c043sOPVCr7P3tAXimVroy7s.jpeg)
+然后需要适量Fe3O4粉，325目及以下就可以了（50g 4元左右）
+![](https://image.lceda.cn/pullimage/SvESL8rtMG1aqxsBP6iwBPlRBgWHc1pFuMlorjJ8.jpeg)
+混在一起，搅拌直到均匀
+最后，开始涂到墙上，记得要多涂几遍
+![](https://image.lceda.cn/pullimage/ITCV1IyqjDAuJjjTdUJrLLZoZrROuwwjIQikpIXu.jpeg)
+一定要用美纹纸确定区域，防止边界参差不齐。。。
